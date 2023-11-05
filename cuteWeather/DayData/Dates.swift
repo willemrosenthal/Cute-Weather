@@ -41,6 +41,8 @@ func buildHolidays() {
     holidayTable["12,31"] = "newyears"
 }
 
+let datesManager = Dates()
+
 struct Dates {
     var currentDate = Date();
     var calendar = Calendar.current
@@ -51,9 +53,16 @@ struct Dates {
         buildHolidays();
     }
     
+    
     mutating func updateDate() {
         currentDate = Date();
         calendar = Calendar.current
+    }
+    
+    func getDayFromTime (timestamp: Double) -> String {
+        let date = Date(timeIntervalSince1970: timestamp)
+        dateFormatter.dateFormat = "E" // "E" represents the day of the week abbreviation
+        return dateFormatter.string(from: date)
     }
     
     func getMonth() -> Int {
@@ -64,6 +73,7 @@ struct Dates {
         return calendar.component(.day, from: currentDate)
     }
     
+    // may not be used
     func getDayOfTheWeek() -> String {
         dateFormatter.dateFormat = "EEEE"
         var dayName = dateFormatter.string(from: currentDate)

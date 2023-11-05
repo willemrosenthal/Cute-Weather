@@ -86,4 +86,15 @@ struct WeatherDataManager {
     func getCurrentWeatherIcon () -> String {
         return weatherData?.current.weather[0].icon ?? ""
     }
+    
+    func getOrderedDayTitle (dayNo: Int) -> String {
+        print ("!!!!!!!")
+        print (weatherData?.daily[dayNo])
+        print (weatherData?.daily[dayNo].dt)
+        let adjustedDayTimestamp = Double(weatherData?.daily[dayNo].dt ?? 0) + Double(weatherDataManager.weatherData?.timezone_offset ?? 0)
+        print ("adjustedDayTimestamp\(adjustedDayTimestamp)")
+//        Dates.getDayFromTime(adjustedDayTimestamp)
+//        print ("dayNo: \(dayNo) res: \(dayList[convertedDayInt]) pre: \(convertedDayInt)")
+        return datesManager.getDayFromTime(timestamp: adjustedDayTimestamp)
+    }
 }

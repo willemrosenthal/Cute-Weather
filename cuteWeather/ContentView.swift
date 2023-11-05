@@ -24,16 +24,30 @@ struct MainWeatherBox: View {
     var body: some View {
         Rectangle()
             .fill(Color.purple)
-            .frame(width: screenWidth * percentageOfScreenWidth, height: 150)
+            .frame(width: screenWidth * percentageOfScreenWidth, height: 200)
             .cornerRadius(20)
         }
+}
+
+func makeSmallDay(dayNum: Int) -> some View {
+    let iconName = getWeatherImage(day: dayNum)
+    
+    return VStack {
+        Text("\(weatherDataManager.getOrderedDayTitle(dayNo: dayNum))")
+            .font(.system(size: 14))
+            .foregroundColor(Color.white)
+        Image(iconName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 40, height: 40) // Adjust the size
+    }
 }
 
 struct ContentView: View {
     @ObservedObject var dataModel = AccessDataModel()
     
     init() {
-        weatherDataManager.assignAccessData(dataModel) 
+        weatherDataManager.assignAccessData(dataModel)
         fetchLocationAndWeather()
     }
 
@@ -58,7 +72,29 @@ struct ContentView: View {
                     Text("\(weatherDataManager.getCurrentDescription())")
                         .font(.system(size: 10))
                         .foregroundColor(Color.white)
+                    HStack {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+//                        Text("\(weatherDataManager.getOrderedDayTitle(dayNo: 0))")
+//                            .font(.system(size: 14))
+//                            .foregroundColor(Color.white)
+//                        
+                        makeSmallDay(dayNum: 0)
+                        Spacer()
+                        makeSmallDay(dayNum: 1)
+                        Spacer()
+                        makeSmallDay(dayNum: 2)
+                        Spacer()
+                        makeSmallDay(dayNum: 3)
+                        Spacer()
+                        makeSmallDay(dayNum: 4)
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    }
                 }.ignoresSafeArea()
+                
             }
             
         }//.padding()
