@@ -69,34 +69,30 @@ struct Dates {
         return calendar.component(.month, from: currentDate)
     }
     
-    func getDay() -> Int {
+    func getDayOfTheMonth() -> Int {
         return calendar.component(.day, from: currentDate)
     }
     
     // may not be used
-    func getDayOfTheWeek() -> String {
-        dateFormatter.dateFormat = "EEEE"
-        var dayName = dateFormatter.string(from: currentDate)
-        dayName = String(dayName.prefix(3))
-        return dayName.capitalized
+    func getCurrentDayOfTheWeek() -> String {
+        dateFormatter.dateFormat = "E"
+        return dateFormatter.string(from: currentDate)
     }
     
-    func getMonthName() -> String {
-        dateFormatter.dateFormat = "MMMM"
-        var monthName = dateFormatter.string(from: currentDate)
-        monthName = String(monthName.prefix(3))
-        return monthName.capitalized
+    func getCurrentMonth() -> String {
+        dateFormatter.dateFormat = "MMM"
+        return dateFormatter.string(from: currentDate)
     }
     
     func birthdayCheck () -> Bool {
         //const date = new Date((todayUnixTimeZoned) * 1000);
         //console.log("hour "+ date.getHours()+" tz: "+weatherData.timezone_offset);
-        print("current: \(getMonth()) bMonth: \(birthdayMonth-1) currentDay: \(getDay()) bDay: \(birthdayDay)")
-        return (getMonth() == (birthdayMonth-1) && getDay() == birthdayDay);
+        print("current: \(getMonth()) bMonth: \(birthdayMonth-1) currentDay: \(getDayOfTheMonth()) bDay: \(birthdayDay)")
+        return (getMonth() == (birthdayMonth-1) && getDayOfTheMonth() == birthdayDay);
     }
     
     func holidayCheck() -> String {
-        let _day = getDay()
+        let _day = getDayOfTheMonth()
         let _month = getMonth() + 1 // add 1 because January starts at 0
 
         // Check holidays

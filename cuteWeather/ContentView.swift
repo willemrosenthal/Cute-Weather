@@ -40,6 +40,24 @@ func makeSmallDay(dayNum: Int) -> some View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40) // Adjust the size
+        Text("\(weatherDataManager.getDailyTemp(dayNo: dayNum))°")
+            .font(.system(size: 14))
+            .foregroundColor(Color.white)
+    }
+}
+
+func makeDateAndIconBlock() -> some View {
+    let iconName = getWeatherImage(day: datesManager.getDayOfTheMonth(), hourly: true)
+    let dateString = "\(datesManager.getCurrentDayOfTheWeek())  \(datesManager.getCurrentMonth()) \(datesManager.getDayOfTheMonth())";
+    
+    return VStack {
+        Text(dateString)
+            .font(.system(size: 14))
+            .foregroundColor(Color.white)
+        Image(iconName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 83, height: 83)
     }
 }
 
@@ -59,19 +77,26 @@ struct ContentView: View {
                     MainWeatherBox()
                 }
                 VStack {
-                    Text(weatherDataManager.locationName)
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.white)
-//                    Text("\(weatherDataManager.getDailyTemp(dayNo:0))°")
-                    Text("\(weatherDataManager.getCurrentTemp())°")
-                        .font(.system(size: 40))
-                        .foregroundColor(Color.white)
-                    Text("L:\(weatherDataManager.getLow(dayNo:0))°  H:\(weatherDataManager.getHigh(dayNo:0))°")
-                        .font(.system(size: 10))
-                        .foregroundColor(Color.white)
-                    Text("\(weatherDataManager.getCurrentDescription())")
-                        .font(.system(size: 10))
-                        .foregroundColor(Color.white)
+                    HStack {
+                        VStack {
+                            Text(weatherDataManager.locationName)
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.white)
+        //                    Text("\(weatherDataManager.getDailyTemp(dayNo:0))°")
+                            Text("\(weatherDataManager.getCurrentTemp())°")
+                                .font(.system(size: 40))
+                                .foregroundColor(Color.white)
+                            Text("L:\(weatherDataManager.getLow(dayNo:0))°  H:\(weatherDataManager.getHigh(dayNo:0))°")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color.white)
+                            Text("\(weatherDataManager.getCurrentDescription())")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color.white)
+                        }
+                        VStack {
+                            makeDateAndIconBlock()
+                        }
+                    }
                     HStack {
                         Spacer()
                         Spacer()
