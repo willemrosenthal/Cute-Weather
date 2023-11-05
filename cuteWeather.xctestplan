@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "2A524A2E-5BBA-4680-8BDA-9CB882ADBDA5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "locationScenario" : {
+      "identifier" : "Sydney, Australia",
+      "referenceType" : "built-in"
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:cuteWeather.xcodeproj",
+      "identifier" : "4FDC7FA82AF6B37300A914CE",
+      "name" : "cuteWeather"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:cuteWeather.xcodeproj",
+        "identifier" : "4FDC7FB82AF6B37400A914CE",
+        "name" : "cuteWeatherTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:cuteWeather.xcodeproj",
+        "identifier" : "4FDC7FC22AF6B37400A914CE",
+        "name" : "cuteWeatherUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

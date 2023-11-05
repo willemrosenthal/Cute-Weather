@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Required to access your location for local weather - NSLocationAlwaysUsageDescription</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Required to access your location for local weather - NSLocationUsageDescription</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Required to access your location for local weather - NSLocationAlwaysAndWhenInUseUsageDescription</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Required to access your location for local weather - NSLocationWhenInUseUsageDescription</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>location</string>
+    </array>
+    
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Required to access your location for local weather "describe how your app uses location services" - NSLocationAlwaysUsageDescription</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Optional, but recommended on iOS 6 &amp; 7 "describe how your app uses location services" - NSLocationAlwaysUsageDescription</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Required to gain access location services on iOS 8+ "describe how your app uses location services" - NSLocationWhenInUseUsageDescription</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>TRequired to gain access location services on iOS 11+ "describe how your app uses location services" - NSLocationAlwaysAndWhenInUseUsageDescription</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>location</string>
+    </array>
+</dict>
+</plist>

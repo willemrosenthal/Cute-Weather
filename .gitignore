@@ -30,6 +30,18 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
