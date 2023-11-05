@@ -27,13 +27,33 @@ struct WeatherDataManager {
     
     mutating func updateWeatherData(data: WeatherData, loc: String) {
         weatherData = data;
-        locationName = loc;
-        self.accessDataModel?.locationName = loc;
-        self.accessDataModel?.weatherData = data;
-        print("updated data:")
-        print("locationName: \(locationName)")
+        locationName = loc != "" ? loc: locationName;
+        
+        // Perform UI-related updates on the main thread
+        // Create a local non-mutating variable for accessDataModel
+        if let accessDataModel = self.accessDataModel {
+            DispatchQueue.main.async {
+                accessDataModel.locationName = loc
+                accessDataModel.weatherData = data
+            }
+        }
+        
 //        print(weatherData)
     }
+    mutating func updateLocName(loc: String) {
+        locationName = loc != "" ? loc: locationName;
+        
+        // Perform UI-related updates on the main thread
+        // Create a local non-mutating variable for accessDataModel
+        if let accessDataModel = self.accessDataModel {
+            DispatchQueue.main.async {
+                accessDataModel.locationName = loc
+            }
+        }
+//        print(locationName)
+    }
+    
+    
     func getDailyTemp (dayNo: Int) -> Int {
        return Int(round(weatherData?.daily[dayNo].temp.day ?? 0.0))
     }

@@ -47,8 +47,10 @@ class YourLocationManager: NSObject, CLLocationManagerDelegate {
                     if let locality = placemark.locality, let administrativeArea = placemark.administrativeArea {
                         let locationName = "\(locality), \(administrativeArea)"
                         
-                        if (locationName == "") {print("!!! failed to get loca name !!!")}
                         print ("got loc name: \(locationName)")
+                        // update loc name
+                        weatherDataManager.updateLocName(loc: locationName)
+                        
                         // Store the location name
                         self.currentLocationName = locationName
 
