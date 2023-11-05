@@ -20,3 +20,5 @@ struct WeatherError: Decodable {
         case errorMessage = "error_message"
     }
 }
+
+// AM I UsiNG THIS>?

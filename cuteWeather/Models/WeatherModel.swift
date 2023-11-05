@@ -1,5 +1,5 @@
 //
-//  model.swift
+//  WeatherModel.swift
 //  cuteWeather
 //
 //  Created by Willem Rosenthal on 11/4/23.
