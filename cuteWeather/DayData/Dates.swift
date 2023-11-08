@@ -23,8 +23,10 @@ func buildHolidays() {
     holidayTable["3,20"] = "spring"
 
     holidayTable["4,1"] = "fool"
+    // variables
     holidayTable["4,9"] = "easter"
 
+    // variable
     holidayTable["5,14"] = "mother"
     holidayTable["5,18"] = "dad"
 
@@ -34,6 +36,7 @@ func buildHolidays() {
 
     holidayTable["10,31"] = "halloween"
 
+    // should be third thurday Thus in nov between 22-18th
     holidayTable["11,24"] = "thanksgiving"
 
     holidayTable["12,21"] = "winter"
@@ -95,6 +98,16 @@ struct Dates {
         let _day = getDayOfTheMonth()
         let _month = getMonth() + 1 // add 1 because January starts at 0
 
+        // caclulate Thanksgiving
+        if (_month == 11) {
+            if (_day <= 22 && _day >= 28 && getCurrentDayOfTheWeek() == "Thu") {
+                return "thanksgiving"
+            }
+        }
+        // caclulate Fathers day
+        // calculate Mothers day
+        // caclulate Easter
+        
         // Check holidays
         if let holiday = holidayTable["\(_month),\(_day)"] as? String {
             print("Holiday today: \(holiday)")

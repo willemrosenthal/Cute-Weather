@@ -33,7 +33,7 @@ func makeSmallDay(dayNum: Int) -> some View {
     let iconName = getWeatherImage(day: dayNum)
     
     return VStack {
-        Text("\(weatherDataManager.getOrderedDayTitle(dayNo: dayNum))")
+        Text(getDayString(dayNo: dayNum))
             .font(.system(size: 14))
             .foregroundColor(Color.white)
         Image(iconName)
@@ -48,7 +48,7 @@ func makeSmallDay(dayNum: Int) -> some View {
 
 func makeDateAndIconBlock() -> some View {
     let iconName = getWeatherImage(day: datesManager.getDayOfTheMonth(), hourly: true)
-    let dateString = "\(datesManager.getCurrentDayOfTheWeek())  \(datesManager.getCurrentMonth()) \(datesManager.getDayOfTheMonth())";
+    let dateString = getCurrentDateString();
     
     return VStack {
         Text(dateString)
@@ -59,6 +59,60 @@ func makeDateAndIconBlock() -> some View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 83, height: 83)
     }
+}
+
+func getCurrentDateString() -> String {
+    return "\(datesManager.getCurrentDayOfTheWeek())  \(datesManager.getCurrentMonth()) \(datesManager.getDayOfTheMonth())"
+}
+
+func getDayString(dayNo: Int) -> String {
+    return "\(weatherDataManager.getOrderedDayTitle(dayNo: dayNo))"
+}
+
+struct DayWeatherData {
+    let dayNo: Int
+    let day: String
+    let temp: Int
+    let icon: String
+    let low: Int?
+    let high: Int?
+    let description: String?
+}
+
+struct ViewData {
+    let date: String
+    let location: String
+    let days: [DayWeatherData]
+}
+
+// build the view data we'll need to pass along for dispaly
+func getWeatherData() -> ViewData {
+    var days = [DayWeatherData]()
+    // get tiny days
+    for i in 0...4 {
+        let dayNo: Int = Int(i)
+        let dayName: String = getDayString(dayNo: Int(i))
+        let dayTemp: Int = weatherDataManager.getDailyTemp(dayNo: Int(i))
+        let dayIcon: String = getWeatherImage(day: i)
+        let day = DayWeatherData(dayNo: dayNo, day: dayName, temp: dayTemp, icon: dayIcon, low: 0, high: 0, description: "")
+        days.append(day)
+    }
+    // get big day
+    let mainDayName:String = getDayString(dayNo: 0)
+    let currentTemp:Int = weatherDataManager.getCurrentTemp()
+    let mainIcon:String = getWeatherImage(day: datesManager.getDayOfTheMonth(), hourly: true)
+    let low:Int = weatherDataManager.getLow(dayNo:0)
+    let high:Int = weatherDataManager.getHigh(dayNo:0)
+    let description: String = weatherDataManager.getCurrentDescription()
+    
+    let mainDay = DayWeatherData(dayNo: 0, day: mainDayName, temp: currentTemp, icon: mainIcon, low: low, high: high, description: description)
+    days.append(mainDay)
+    
+    let date:String = getCurrentDateString()
+    let loc:String = weatherDataManager.locationName
+    
+    let viewData:ViewData = ViewData(date: date, location: loc, days: days)
+    return viewData
 }
 
 struct ContentView: View {
